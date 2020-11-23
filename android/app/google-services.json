@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "805834464911",
+    "firebase_url": "https://medcardio-6f718.firebaseio.com",
+    "project_id": "medcardio-6f718",
+    "storage_bucket": "medcardio-6f718.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:805834464911:android:3be45f1f13aed460d7dafa",
+        "android_client_info": {
+          "package_name": "com.example.cardiomed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "805834464911-tqv7514r68r576dhs2mnuqiq2ua7bldn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cardiomed",
+            "certificate_hash": "23078c0756bfd53f298771165ac9195e1b735456"
+          }
+        },
+        {
+          "client_id": "805834464911-r79aiegjmree3lb0o11g74co3l9c5e1l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkestmVnoPq8W9hdSvQr9weW27rdPvxZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "805834464911-r79aiegjmree3lb0o11g74co3l9c5e1l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
