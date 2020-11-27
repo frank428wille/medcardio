@@ -1,5 +1,4 @@
 import 'package:fit_kit/fit_kit.dart';
-import 'package:fl_chart/fl_chart.dart';
 
 double teste2, horaExata;
 var results;

@@ -1,7 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'getbatimentos.dart';
-import 'package:fit_kit/fit_kit.dart';
 import 'main.dart';
 
 // ignore: must_be_immutable
