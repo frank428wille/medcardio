@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'chart.dart';
 import 'getbatimentos.dart';
-import 'package:flutter/src/rendering/box.dart';
 
 void main() => runApp(MaterialApp(
       home: MyApp(),
@@ -11,6 +10,8 @@ void main() => runApp(MaterialApp(
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    revokePermissions();
+    read();
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
                 height: 200.0,
                 child: new PageView(
                   children: <Widget>[
-                    Image.asset('assets/image/logo.png'),
+                    Image.asset('assets/logo.png'),
                   ],
                 ),
               ),
@@ -39,8 +40,8 @@ class MyApp extends StatelessWidget {
                   textColor: Colors.white,
                   child: Text('ENTRAR'),
                   onPressed: () {
-                    read();
                     _navigateToSubPage(context);
+                    read();
                   },
                 ),
               ),

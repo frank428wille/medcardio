@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'getbatimentos.dart';
@@ -7,12 +5,19 @@ import 'package:fit_kit/fit_kit.dart';
 import 'main.dart';
 
 // ignore: must_be_immutable
-class LineChartSample2 extends StatelessWidget {
+class LineChartSample2 extends StatefulWidget {
+  @override
+  _LineChartSample2State createState() => _LineChartSample2State();
+}
+
+class _LineChartSample2State extends State<LineChartSample2> {
   List<Color> gradientColors = [
     const Color(0xFFFFCDD2),
     const Color(0xFFFF1744),
   ];
+
   LineChartSample2 createState() => LineChartSample2();
+
   bool showAvg = false;
 
   @override
@@ -75,7 +80,7 @@ class LineChartSample2 extends StatelessWidget {
                             EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                         padding: EdgeInsets.all(10),
                         child: Text(
-                          '$horaExata',
+                          '${results[0].value}',
                           style: TextStyle(
                             color: Colors.white70,
                             fontWeight: FontWeight.bold,
@@ -102,7 +107,7 @@ class LineChartSample2 extends StatelessWidget {
                               horizontal: 15, vertical: 10),
                           padding: EdgeInsets.all(10),
                           child: Text(
-                            '$teste2',
+                            '$condi',
                             style: TextStyle(
                               color: Colors.white70,
                               fontWeight: FontWeight.bold,
@@ -125,6 +130,7 @@ class LineChartSample2 extends StatelessWidget {
               child: Text('SAIR'),
               onPressed: () {
                 _navigateToSubPage(context);
+                revokePermissions();
                 //readAll();
               },
             ),
@@ -132,11 +138,13 @@ class LineChartSample2 extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: FlatButton(
-              color: Colors.red,
-              textColor: Colors.white,
-              child: Text('Read'),
-              onPressed: () => read(),
-            ),
+                color: Colors.red,
+                textColor: Colors.white,
+                child: Text('Read'),
+                onPressed: () {
+                  showAlertDialog1(context);
+                  read();
+                }),
           ),
         ],
       ),
@@ -237,7 +245,16 @@ class LineChartSample2 extends StatelessWidget {
       lineBarsData: [
         LineChartBarData(
           spots: [
-            FlSpot(data1[0], data2[0]),
+            FlSpot(results[0].dateFrom.hour + 0.0, results[0].value),
+            FlSpot(results[50].dateFrom.hour + 0.0, results[50].value),
+            FlSpot(results[100].dateFrom.hour + 0.0, results[100].value),
+            FlSpot(results[150].dateFrom.hour + 0.0, results[150].value),
+            FlSpot(results[200].dateFrom.hour + 0.0, results[200].value),
+            FlSpot(results[250].dateFrom.hour + 0.0, results[250].value),
+            FlSpot(results[300].dateFrom.hour + 0.0, results[300].value),
+            FlSpot(results[350].dateFrom.hour + 0.0, results[350].value),
+            FlSpot(results[400].dateFrom.hour + 0.0, results[400].value),
+            FlSpot(results[450].dateFrom.hour + 0.0, results[450].value),
           ],
           isCurved: true,
           colors: gradientColors,
@@ -253,6 +270,48 @@ class LineChartSample2 extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+showAlertDialog1(BuildContext context) {
+  // configura o button
+  Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      });
+  if (results[0].value > 85) {
+    // configura o  AlertDialog
+    AlertDialog alerta = AlertDialog(
+      title: Text("ATENÇÃO"),
+      content: Text("BATIMENTOS ALTOS!"),
+      actions: [
+        okButton,
+      ],
+    );
+    // exibe o dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alerta;
+      },
+    );
+  } else if (results[0].value < 55) {
+    // configura o  AlertDialog
+    AlertDialog alerta = AlertDialog(
+      title: Text("ATENÇÃO"),
+      content: Text("BATIMENTOS BAIXOS!"),
+      actions: [
+        okButton,
+      ],
+    );
+    // exibe o dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alerta;
+      },
     );
   }
 }

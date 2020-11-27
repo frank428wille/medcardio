@@ -3,30 +3,40 @@ import 'package:fl_chart/fl_chart.dart';
 
 double teste2, horaExata;
 var results;
-List lista;
-var b, data1, data2;
-List<FlSpot> grafico;
+String condi = '';
 void read() async {
   try {
     results = await FitKit.read(
       DataType.HEART_RATE,
-      dateFrom: DateTime.now().subtract(Duration(days: 5)),
+      dateFrom: DateTime.now().subtract(Duration(hours: 24)),
       dateTo: DateTime.now(),
     );
-    b = results.length;
-    print('$b');
-    teste2 = results[0].value;
-    horaExata = results[0].dateFrom.hour + 0.0;
-    montaGrafico();
+    if (results[0].value <= 55) {
+      condi = 'Excelente';
+    } else if (results[0].value >= 62 && results[0].value <= 69) {
+      condi = 'Boa';
+    } else if (results[0].value >= 70 && results[0].value <= 78) {
+      condi = 'Normal';
+    } else if (results[0].value >= 79 && results[0].value <= 84) {
+      condi = 'Razoável';
+    } else if (results[0].value >= 85) {
+      condi = 'Ruim';
+    }
   } on UnsupportedException catch (e) {
     // thrown in case e.dataType is unsupported
   }
 }
 
-montaGrafico() {
-  for (int i = 0; i <= b; i++) {
-    data1 = results[i].dateFrom.hour + 0.0;
-    data2 = results[i].value;
-    i = i += i;
+Future<void> revokePermissions() async {
+  String result = '';
+  results.clear();
+  bool permissions;
+
+  try {
+    await FitKit.revokePermissions();
+    permissions = await FitKit.hasPermissions(DataType.values);
+    result = 'revokePermissions: success';
+  } catch (e) {
+    result = 'revokePermissions: $e';
   }
 }
