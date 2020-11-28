@@ -6,13 +6,13 @@ void main() => runApp(MaterialApp(
       home: MyApp(),
     ));
 
+//CLASSE PARA CRIAR TELA DE LOGIN
 @override
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     revokePermissions();
     read();
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -25,7 +25,6 @@ class MyApp extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              //Text('LOGOTIPO'),
               SizedBox(
                 height: 200.0,
                 child: new PageView(
@@ -54,6 +53,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//FUNÇÃO PARA CHAMAR PAGINA PRINCIPAL
 Future _navigateToSubPage(context) async {
   Navigator.pushReplacement(
       context, MaterialPageRoute(builder: (context) => LineChartSample2()));

@@ -9,6 +9,7 @@ class LineChartSample2 extends StatefulWidget {
   _LineChartSample2State createState() => _LineChartSample2State();
 }
 
+//CLASSE PARA CRIAR TELA PRINCIPAL
 class _LineChartSample2State extends State<LineChartSample2> {
   List<Color> gradientColors = [
     const Color(0xFFFFCDD2),
@@ -21,6 +22,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {});
     return Scaffold(
       backgroundColor: Color(0xff232d37),
       appBar: AppBar(
@@ -130,7 +132,6 @@ class _LineChartSample2State extends State<LineChartSample2> {
               onPressed: () {
                 _navigateToSubPage(context);
                 revokePermissions();
-                //readAll();
               },
             ),
           ),
@@ -143,6 +144,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
                 onPressed: () {
                   showAlertDialog1(context);
                   read();
+                  setState(() {});
                 }),
           ),
         ],
@@ -150,10 +152,12 @@ class _LineChartSample2State extends State<LineChartSample2> {
     );
   }
 
+//FUNÇÃO PARA RETORNAR A TELA DE LOGIN
   Future _navigateToSubPage(context) async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
   }
 
+//FUNÇÃO DE CRIAÇÃO DO GRAFICO
   LineChartData mainData() {
     return LineChartData(
       gridData: FlGridData(
@@ -172,6 +176,9 @@ class _LineChartSample2State extends State<LineChartSample2> {
           );
         },
       ),
+
+      /* Especifica os valores do eixa das abscissas indicando os valores em 
+      horas do dia. */
       titlesData: FlTitlesData(
         show: true,
         bottomTitles: SideTitles(
@@ -202,6 +209,8 @@ class _LineChartSample2State extends State<LineChartSample2> {
           },
           margin: 8,
         ),
+        /* Cria os valores do eixo das ordenadas indicando os valres em 
+        batimentos por minuto. */
         leftTitles: SideTitles(
           showTitles: true,
           getTextStyles: (value) => const TextStyle(
@@ -234,6 +243,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
           margin: 12,
         ),
       ),
+      /* Especifica os valores e efeitos do grafico. */
       borderData: FlBorderData(
           show: true,
           border: Border.all(color: const Color(0xff37434d), width: 1)),
@@ -244,18 +254,6 @@ class _LineChartSample2State extends State<LineChartSample2> {
       lineBarsData: [
         LineChartBarData(
           spots: montaGrafico(),
-          /*spots: [
-            FlSpot(results[0].dateFrom.hour + 0.0, results[0].value),
-            FlSpot(results[50].dateFrom.hour + 0.0, results[50].value),
-            FlSpot(results[100].dateFrom.hour + 0.0, results[100].value),
-            FlSpot(results[150].dateFrom.hour + 0.0, results[150].value),
-            FlSpot(results[200].dateFrom.hour + 0.0, results[200].value),
-            FlSpot(results[250].dateFrom.hour + 0.0, results[250].value),
-            FlSpot(results[300].dateFrom.hour + 0.0, results[300].value),
-            FlSpot(results[350].dateFrom.hour + 0.0, results[350].value),
-            FlSpot(results[400].dateFrom.hour + 0.0, results[400].value),
-            FlSpot(results[450].dateFrom.hour + 0.0, results[450].value),
-          ],*/
           isCurved: true,
           colors: gradientColors,
           barWidth: 5,
@@ -274,6 +272,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
   }
 }
 
+//FUNÇÃO DE CRIAÇÃO DE ALERTAS DE BATIMENTOS.
 showAlertDialog1(BuildContext context) {
   // configura o button
   Widget okButton = FlatButton(
@@ -316,17 +315,21 @@ showAlertDialog1(BuildContext context) {
   }
 }
 
+//FUNÇÃO QUE FORNECE DADOS PARA CONSTRUÇÃO DO GRAFICO.
 List<FlSpot> montaGrafico() {
   List<FlSpot> dadoGrafico = new List<FlSpot>();
   FlSpot dados;
+  /* Transforma o resultado da leitura do google fit em uma lista gerando 
+  uma quantidade fixa de dados lidos fornecendo um paramentro para ler os 
+  valores para que seja distribuidos graficamente. */
   items = results.toList();
   final List fixedList = Iterable<int>.generate(items.length).toList();
   teste = fixedList.last;
-  print('$teste');
+  /* Faz a varredura de forma procedural de todos os dados coletados trazendo
+  a hora e o valor daquela hora. */
   for (int i = 0; i <= teste; i++) {
     dados = FlSpot(results[i].dateFrom.hour + 0.0, results[i].value);
     dadoGrafico.add(dados);
-    print('${dadoGrafico[i].x}');
   }
 
   return dadoGrafico;

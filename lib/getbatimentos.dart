@@ -6,14 +6,18 @@ var results, items;
 int teste;
 String condi = '';
 
+//FUNÇÃO QUE REALIZA LOGIN VIA GOOGLE, E LEITURA DE DADOS DO GOOGLE FIT
 void read() async {
   try {
+    /*Realiza leitura através da biblioteca fitkit, podendo ser um dado 
+    especifico ou mais de um. */
     results = await FitKit.read(
       DataType.HEART_RATE,
       dateFrom: DateTime.now().subtract(Duration(hours: 24)),
       dateTo: DateTime.now(),
     );
 
+    /* Indica a condição dos batimentos no momento. */
     if (results[teste].value <= 55) {
       condi = 'Excelente';
     } else if (results[teste].value >= 62 && results[teste].value <= 69) {
@@ -30,11 +34,12 @@ void read() async {
   }
 }
 
+//FUNÇÃO PARA SAIR DA CONTA GOOGLE.
 Future<void> revokePermissions() async {
   String result = '';
   results.clear();
   bool permissions;
-
+/* Revoga as permissões do Google Account. */
   try {
     await FitKit.revokePermissions();
     permissions = await FitKit.hasPermissions(DataType.values);
