@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     revokePermissions();
     read();
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(

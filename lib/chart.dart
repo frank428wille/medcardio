@@ -79,7 +79,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
                             EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                         padding: EdgeInsets.all(10),
                         child: Text(
-                          '${results[0].value}',
+                          '${results[teste].value}',
                           style: TextStyle(
                             color: Colors.white70,
                             fontWeight: FontWeight.bold,
@@ -243,7 +243,8 @@ class _LineChartSample2State extends State<LineChartSample2> {
       maxY: 150,
       lineBarsData: [
         LineChartBarData(
-          spots: [
+          spots: montaGrafico(),
+          /*spots: [
             FlSpot(results[0].dateFrom.hour + 0.0, results[0].value),
             FlSpot(results[50].dateFrom.hour + 0.0, results[50].value),
             FlSpot(results[100].dateFrom.hour + 0.0, results[100].value),
@@ -254,7 +255,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
             FlSpot(results[350].dateFrom.hour + 0.0, results[350].value),
             FlSpot(results[400].dateFrom.hour + 0.0, results[400].value),
             FlSpot(results[450].dateFrom.hour + 0.0, results[450].value),
-          ],
+          ],*/
           isCurved: true,
           colors: gradientColors,
           barWidth: 5,
@@ -280,7 +281,7 @@ showAlertDialog1(BuildContext context) {
       onPressed: () {
         Navigator.of(context).pop();
       });
-  if (results[0].value > 85) {
+  if (results[teste].value > 85) {
     // configura o  AlertDialog
     AlertDialog alerta = AlertDialog(
       title: Text("ATENÇÃO"),
@@ -296,7 +297,7 @@ showAlertDialog1(BuildContext context) {
         return alerta;
       },
     );
-  } else if (results[0].value < 55) {
+  } else if (results[teste].value < 55) {
     // configura o  AlertDialog
     AlertDialog alerta = AlertDialog(
       title: Text("ATENÇÃO"),
@@ -313,4 +314,20 @@ showAlertDialog1(BuildContext context) {
       },
     );
   }
+}
+
+List<FlSpot> montaGrafico() {
+  List<FlSpot> dadoGrafico = new List<FlSpot>();
+  FlSpot dados;
+  items = results.toList();
+  final List fixedList = Iterable<int>.generate(items.length).toList();
+  teste = fixedList.last;
+  print('$teste');
+  for (int i = 0; i <= teste; i++) {
+    dados = FlSpot(results[i].dateFrom.hour + 0.0, results[i].value);
+    dadoGrafico.add(dados);
+    print('${dadoGrafico[i].x}');
+  }
+
+  return dadoGrafico;
 }
