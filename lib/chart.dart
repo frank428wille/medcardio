@@ -22,7 +22,6 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() {});
     return Scaffold(
       backgroundColor: Color(0xff232d37),
       appBar: AppBar(
@@ -108,7 +107,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
                               horizontal: 15, vertical: 10),
                           padding: EdgeInsets.all(10),
                           child: Text(
-                            '$condi',
+                            '${condicao()}',
                             style: TextStyle(
                               color: Colors.white70,
                               fontWeight: FontWeight.bold,
@@ -132,6 +131,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
               onPressed: () {
                 _navigateToSubPage(context);
                 revokePermissions();
+                read();
               },
             ),
           ),
